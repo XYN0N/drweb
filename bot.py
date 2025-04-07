@@ -18,8 +18,8 @@ TOKEN = "IL_TUO_TOKEN_QUI"
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Gestisce il comando /start"""
     welcome_message = (
-        "👋 *Benvenuto in MrWeb 2.0!*\n\n"
-        "Questa è la nuova versione di MrWeb che utilizza l'API di MrWeb.\n\n"
+        "👋 *Benvenuto in DrWeb 2.0!*\n\n"
+        "Questa è la nuova versione di DrWeb che utilizza l'API di DrWeb.\n\n"
         "Puoi utilizzare:\n"
         "• L'interfaccia web (miniapp)\n"
         "• L'interfaccia testuale (chat)\n\n"
@@ -53,16 +53,44 @@ async def about_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     server_status = await check_server_status()
     
     about_message = (
-        "📊 *Informazioni MrWeb 2.0*\n\n"
+        "📊 *Informazioni DrWeb 2.0*\n\n"
         f"👤 Owner: [macs](https://t.me/onniscienza)\n"
         f"📦 Versione: 1.0.0\n"
         f"🌐 Server: {server_status}"
     )
     
+    keyboard = [
+        [InlineKeyboardButton("🔙 Back", callback_data="back")]
+    ]
+    
     await query.edit_message_text(
         about_message,
         parse_mode='Markdown',
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("ℹ️ About", callback_data="about")]])
+        reply_markup=InlineKeyboardMarkup(keyboard)
+    )
+
+async def back_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Gestisce il callback del pulsante Back"""
+    query = update.callback_query
+    await query.answer()
+    
+    welcome_message = (
+        "👋 *Benvenuto in DrWeb 2.0!*\n\n"
+        "Questa è la nuova versione di DrWeb che utilizza l'API di DrWeb.\n\n"
+        "Puoi utilizzare:\n"
+        "• L'interfaccia web (miniapp)\n"
+        "• L'interfaccia testuale (chat)\n\n"
+        "Usa il pulsante About per maggiori informazioni!"
+    )
+    
+    keyboard = [
+        [InlineKeyboardButton("ℹ️ About", callback_data="about")]
+    ]
+    
+    await query.edit_message_text(
+        welcome_message,
+        parse_mode='Markdown',
+        reply_markup=InlineKeyboardMarkup(keyboard)
     )
 
 def main() -> None:
@@ -73,6 +101,7 @@ def main() -> None:
     # Aggiungi i gestori
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(about_callback, pattern="^about$"))
+    application.add_handler(CallbackQueryHandler(back_callback, pattern="^back$"))
 
     # Avvia il bot
     application.run_polling(allowed_updates=Update.ALL_TYPES)
