@@ -16,7 +16,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-TOKEN = "7689549040:AAFgAR-ltGOBeqppaS6Bw60AXXAp-a9MYYo"
+TOKEN = "your-bot-token"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     welcome_message = (
