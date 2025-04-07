@@ -1,56 +1,70 @@
-# DrWeb 2.0 - Bot Telegram
+# DrWeb 2.0 Telegram Bot
 
-Bot Telegram con interfaccia web per DrWeb 2.0.
+DrWeb 2.0 è un bot Telegram che utilizza l'API di DrWeb per scansionare file e URL alla ricerca di virus. Fornisce risultati di scansione in tempo reale direttamente su Telegram.
 
-## Caratteristiche
+## Features
 
-- 👋 Messaggio di benvenuto personalizzato
-- ℹ️ Pulsante About con informazioni aggiornate
-- 🌐 Controllo stato server in tempo reale
-- 📱 Interfaccia web per caricamento file e URL
-- 💬 Interfaccia testuale per la chat
+- Scansione di file caricati dagli utenti.
+- Scansione di URL inviati dagli utenti.
+- Visualizzazione di risultati dettagliati della scansione, inclusi tempo di scansione, stato del file/URL e link ai risultati.
 
-## Installazione
+## Requirements
 
-1. Clona il repository:
-```bash
-git clone [URL_REPOSITORY]
-cd drweb-bot
-```
+- **Python 3.8+**
+- **pip** per installare le dipendenze
+- **Telegram Bot Token** da [BotFather](https://core.telegram.org/bots#botfather)
+- **Integrazione API DrWeb** (se necessario)
 
-2. Installa le dipendenze:
-```bash
-pip install -r requirements.txt
-```
+## Installation
 
-3. Configura il bot:
-   - Ottieni il token del bot da @BotFather su Telegram
-   - Sostituisci `IL_TUO_TOKEN_QUI` nel file `bot.py` con il tuo token
+1. **Clona il repository**:
+   ```bash
+   git clone https://github.com/your-username/drweb-bot.git
+   cd drweb-bot
+   ```
 
-4. Avvia il bot:
-```bash
-python bot.py
-```
+2. **Crea e attiva un ambiente virtuale (opzionale)**:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # Windows: venv\Scripts\activate
+   ```
 
-## Struttura del Progetto
+3. **Installa le dipendenze**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Configura il bot**:
+   - Crea un file `.env` (o modifica il codice) per aggiungere il tuo token del bot Telegram:
+   ```plaintext
+   BOT_TOKEN=your-telegram-bot-token
+   ```
+
+5. **Avvia il bot**:
+   ```bash
+   python bot.py
+   ```
+
+## Directory Structure
 
 ```
 drweb-bot/
-├── bot.py              # Codice principale del bot
-├── index.html          # Interfaccia web della miniapp
-├── requirements.txt    # Dipendenze Python
-└── README.md          # Documentazione
+│
+├── bot.py                # File principale del bot
+├── requirements.txt      # File delle dipendenze
+├── uploads/              # Directory dove i file vengono temporaneamente salvati
+│
+└── README.md             # Questo file
 ```
 
-## Utilizzo
+**uploads/**: La cartella dove i file vengono temporaneamente salvati per la scansione. Sostituiscila con il tuo percorso di directory (es. `/var/www/html/bot/drweb/test/uploads/`) se necessario, e assicurati che sia scrivibile dal bot.
 
-1. Avvia una chat con il bot su Telegram
-2. Usa il comando `/start` per iniziare
-3. Clicca sul pulsante "About" per vedere le informazioni aggiornate
-4. Usa la miniapp per caricare file o inviare URL
+## Commands
 
-## Note
+- `/start`: Visualizza il messaggio di benvenuto e le opzioni.
+- Invia un file: Il bot scansiona il file e fornisce i risultati.
+- Invia un URL: Il bot scansiona l'URL e fornisce i risultati.
 
-- Il bot controlla lo stato del server ogni volta che viene premuto il pulsante About
-- L'interfaccia web è ottimizzata per dispositivi mobili
-- Il link del proprietario è nascosto ma cliccabile nel messaggio About 
+## License
+
+Distribuito sotto la Licenza MIT. Vedi il file LICENSE per ulteriori dettagli. 
