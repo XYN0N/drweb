@@ -1,6 +1,6 @@
-# MrWeb 2.0 - Bot Telegram
+# DrWeb 2.0 - Bot Telegram
 
-Bot Telegram con interfaccia web per MrWeb 2.0.
+Bot Telegram con interfaccia web per DrWeb 2.0.
 
 ## Caratteristiche
 
@@ -15,7 +15,7 @@ Bot Telegram con interfaccia web per MrWeb 2.0.
 1. Clona il repository:
 ```bash
 git clone [URL_REPOSITORY]
-cd mrweb-bot
+cd drweb-bot
 ```
 
 2. Installa le dipendenze:
@@ -35,7 +35,7 @@ python bot.py
 ## Struttura del Progetto
 
 ```
-mrweb-bot/
+drweb-bot/
 ├── bot.py              # Codice principale del bot
 ├── index.html          # Interfaccia web della miniapp
 ├── requirements.txt    # Dipendenze Python
