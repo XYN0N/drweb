@@ -1,0 +1,46 @@
+<style type="text/css">
+  .drweb_scan_button_wrapper,
+  .drweb_file_selection_wrapper {background:url(buttons.png) no-repeat 0 0;}
+  .drweb_scan_button_wrapper {background-position: -61px 0;}
+    .drweb_scan_button_wrapper:hover {background-position: -61px -21px;}
+    .drweb_scan_button_wrapper:active {background-position: -61px -42px;}
+  .drweb_file_selection_wrapper {background-position: 144px 0;}
+    .drweb_file_selection_wrapper:hover {background-position: 144px -21px;}
+    .drweb_file_selection_wrapper:active {background-position: 144px -42px;}
+</style>
+
+<form method="POST" id="drweb_online_scan_form"
+enctype="multipart/form-data" action="https://online.drweb.com/result/?lng=en" target="drweb_scan_form_popup_window">
+
+<div style="width: 225px; height: 105px; background: url(fon.gif)">
+    <span id="drweb_check_css" style="display:none;">&nbsp;</span>
+    <div style="padding: 50px 10px 0 10px;">
+        <div id="drweb_url_scan" style="float:left; width:130px; border:#9ac461 2px solid; padding:1px 3px 0; overflow:hidden; white-space:nowrap; font-size:11px; line-height:16px; margin:0 3px 0 0; height:16px; background-color:#fff;"></div>
+        <div style="float:left; position:relative; margin-top:-21px; width:205px; height:21px; cursor:pointer; overflow:hidden;" class="drweb_file_selection_wrapper">
+          <img src="empty.gif" align="left" width="0" height="0" style="width:65px; float:right; height:100px; text-align:right; display:block; color:#fff; font-size:10px;" alt="&nbsp;Review"/>
+          <input name="file" id="file_selection_input" type="file" title="Review" onchange="if(document.getElementById('drweb_check_css').offsetWidth == 0) document.getElementById('drweb_url_scan').innerHTML = this.value;" style="height:110%; font-size:10em; position:absolute; z-index:2; top:-5%; right:-1px; margin:0; padding:0; opacity:0; filter:alpha(opacity:0); cursor:pointer;"/>
+        </div>
+        <div style="float:right; width:121px; height:21px; margin:4px 0 0; position:relative; overflow:hidden;" class="drweb_scan_button_wrapper">
+          <img src="empty.gif" align="left" width="0" height="0" style="width:100%; height:100px; color:#fff; font-size:10px;" alt="&nbsp;Scan"/>
+          <input type="button" onclick="return do_scan_file_01();" style="width:100%; height:21; margin:0; padding:0; position:absolute; z-index:2; left:0; top:0; opacity:0; filter:alpha(opacity:0); cursor:pointer;" value="Scan" title="Scan" />
+        </div>
+    </div>
+</div>
+</form>
+
+<script language="JavaScript">
+if( navigator.userAgent.match( /Opera Mini/i ) )
+    document.getElementById( 'drweb_url_input_wrapper' ).
+      innerHTML = '<input name="file" id="drweb_file_selection_input" type="file" style="width:100%; height:19px; border:1px solid #fff; background-color:#fff; padding:0; margin:0; -moz-box-sizing:content-box; -webkit-box-sizing:content-box; box-sizing:content-box; font-size:10px; vertical-align:top;">';
+
+function do_scan_file_01()
+{
+    var left = (screen.width - 640)/2;
+    var top =  (screen.height - 400)/2;
+    window.open( "",
+                 "drweb_scan_form_popup_window",
+         "width=640"+",height=400,left="+left+",top="+top+",scrollbars=yes,resizable=yes" );
+    document.getElementById( "drweb_online_scan_form" ).submit();
+    return false;
+}
+</script>

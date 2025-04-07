@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MrWeb 2.0 - Miniapp</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #0088cc;
+            margin-bottom: 10px;
+        }
+        .upload-section {
+            margin-bottom: 30px;
+        }
+        .url-section {
+            margin-bottom: 30px;
+        }
+        .button {
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #006699;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+        .status {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .online {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .offline {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📱 MrWeb 2.0</h1>
+            <p>Benvenuto nella nuova versione di MrWeb!</p>
+        </div>
+
+        <div class="upload-section">
+            <h2>📁 Carica File</h2>
+            <input type="file" id="fileInput" style="display: none;">
+            <button class="button" onclick="document.getElementById('fileInput').click()">
+                Seleziona File
+            </button>
+        </div>
+
+        <div class="url-section">
+            <h2>🔗 Inserisci URL</h2>
+            <input type="text" id="urlInput" placeholder="Inserisci l'URL qui...">
+            <button class="button" onclick="handleUrl()">
+                Invia URL
+            </button>
+        </div>
+
+        <div id="serverStatus" class="status">
+            Controllo stato server...
+        </div>
+    </div>
+
+    <script>
+        // Inizializza la WebApp di Telegram
+        const webApp = window.Telegram.WebApp;
+        webApp.ready();
+
+        // Funzione per gestire l'URL
+        function handleUrl() {
+            const url = document.getElementById('urlInput').value;
+            if (url) {
+                // Invia l'URL al bot
+                webApp.sendData(url);
+            }
+        }
+
+        // Gestione del caricamento file
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Invia il file al bot
+                webApp.sendData(JSON.stringify({
+                    type: 'file',
+                    name: file.name,
+                    size: file.size
+                }));
+            }
+        });
+
+        // Controllo stato server
+        async function checkServerStatus() {
+            try {
+                const response = await fetch('http://217.154.2.118');
+                const statusDiv = document.getElementById('serverStatus');
+                statusDiv.className = 'status online';
+                statusDiv.textContent = '🟢 SERVER ONLINE';
+            } catch (error) {
+                const statusDiv = document.getElementById('serverStatus');
+                statusDiv.className = 'status offline';
+                statusDiv.textContent = '🔴 SERVER OFFLINE';
+            }
+        }
+
+        // Controlla lo stato del server ogni 30 secondi
+        checkServerStatus();
+        setInterval(checkServerStatus, 30000);
+    </script>
+</body>
+</html> 
